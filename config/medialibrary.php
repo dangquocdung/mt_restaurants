@@ -148,5 +148,5 @@ return [
     /*
      * Folder name of the icons
      */
-    'icons_folder' => env('APP_URL').'/images/icons',
+    'icons_folder' => env('APP_URL').'images/icons',
 ];
