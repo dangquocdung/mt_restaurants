@@ -835,5 +835,5 @@ return [
     'user_updated_at_help' => 'Insert Updated At',
     'user_updated_at_placeholder' => 'Insert Updated At',
     'view_details' => 'View details',
-    'yes' => 'Yes',
+    'yes' => '',
 ];

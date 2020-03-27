@@ -1,7 +1,6 @@
 <?php 
 
 return [
-    'imdi' => '',
-    'next' => 'Next »',
-    'previous' => '« Previous',
+    'previous' => '',
+    'next' => '',
 ];
