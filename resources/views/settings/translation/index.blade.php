@@ -13,7 +13,7 @@
     <div class="card">
         <div class="card-header">
             <ul class="nav nav-tabs align-items-end card-header-tabs w-100">
-                @foreach($languages as $code => $language)
+                @foreach((array)$languages as $code => $language)
                     <li class="nav-item">
                         <a class="nav-link @if($tab === $code) active @endif" href="{!! url('settings/translation/'.$code) !!}"><i class="fa fa-language mr-2"></i>{{trans('lang.app_setting_'.$code)}}
                         </a>
