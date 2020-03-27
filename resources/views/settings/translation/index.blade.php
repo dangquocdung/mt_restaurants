@@ -13,7 +13,7 @@
     <div class="card">
         <div class="card-header">
             <ul class="nav nav-tabs align-items-end card-header-tabs w-100">
-                @foreach((array)$languages as $code => $language)
+                @foreach($languages as $code => $language)
                     <li class="nav-item">
                         <a class="nav-link @if($tab === $code) active @endif" href="{!! url('settings/translation/'.$code) !!}"><i class="fa fa-language mr-2"></i>{{trans('lang.app_setting_'.$code)}}
                         </a>
@@ -38,101 +38,6 @@
                 </div>
                 <div class="col-9 tab-content" id="v-pills-tabContent">
                     {{--['user' => ['en' => 'user.php', 'nl' => 'user.php']]--}}
-                    @foreach($langFiles as $filename => $lang)
-                        <div class="tab-pane fade" id="v-pills-{{$filename}}" role="tabpanel" aria-labelledby="v-pills-{{$filename}}-tab">
-                            @foreach(\Illuminate\Support\Facades\Lang::get($filename.'',[],$tab) as $key => $item)
-                                @if(!is_array($item))
-                                    @component('layouts.components.lang_item',[
-                                    'item' => $item,
-                                    'name' => $filename.'|'.$key,
-                                    'key' => $key,
-                                    'keyWithFileName' => $filename.'.'.$key])
-                                    @endcomponent
-                                @elseif(is_array($item))
-                                    {{--lang item contains array value--}}
-                                    @foreach($item as $childKey => $childItem)
-                                        @if(!is_array($childItem))
-                                            @component('layouts.components.lang_item',[
-                                                'item' => $childItem,
-                                                'name' => $filename.'|'.$key.'|'.$childKey,
-                                                'key' => $key.'.'.$childKey,
-                                                'keyWithFileName' => $filename.".".$key.".".$childKey])
-                                            @endcomponent
-                                        @elseif(is_array($childItem))
-                                            @foreach($childItem as $childKey2 => $childItem2)
-                                                @if(!is_array($childItem2))
-                                                    @component('layouts.components.lang_item',[
-                                                        'item' => $childItem2,
-                                                        'name' => $filename.'|'.$key.'|'.$childKey.'|'.$childKey2,
-                                                        'key' => $key.'.'.$childKey.'.'.$childKey2,
-                                                        'keyWithFileName' => $filename.".".$key.".".$childKey.".".$childKey2])
-                                                    @endcomponent
-                                                @elseif(is_array($childItem2))
-                                                    @foreach($childItem2 as $childKey3 => $childItem3)
-                                                        @if(!is_array($childItem3))
-                                                            @component('layouts.components.lang_item',[
-                                                                'item' => $childItem3,
-                                                                'name' => $filename.'|'.$key.'|'.$childKey.'|'.$childKey2.'|'.$childKey3,
-                                                                'key' => $key.'.'.$childKey.'.'.$childKey2.'.'.$childKey3,
-                                                                'keyWithFileName' => $filename.".".$key.".".$childKey.".".$childKey2.".".$childKey3])
-                                                            @endcomponent
-                                                        @elseif(is_array($childItem3))
-                                                            @foreach($childItem3 as $childKey4 => $childItem4)
-                                                                @if(!is_array($childItem4))
-                                                                    @component('layouts.components.lang_item',[
-                                                                        'item' => $childItem4,
-                                                                        'name' => $filename.'|'.$key.'|'.$childKey.'|'.$childKey2.'|'.$childKey3.'|'.$childKey4,
-                                                                        'key' => $key.'.'.$childKey.'.'.$childKey2.'.'.$childKey3.'.'.$childKey4,
-                                                                        'keyWithFileName' => $filename.".".$key.".".$childKey.".".$childKey2.".".$childKey3.".".$childKey4])
-                                                                    @endcomponent
-                                                                @elseif(is_array($childItem4))
-                                                                    @foreach($childItem4 as $childKey5 => $childItem5)
-                                                                        @if(!is_array($childItem5))
-                                                                            @component('layouts.components.lang_item',[
-                                                                                'item' => $childItem5,
-                                                                                'name' => $filename.'|'.$key.'|'.$childKey.'|'.$childKey2.'|'.$childKey3.'|'.$childKey4.'|'.$childKey5,
-                                                                                'key' => $key.'.'.$childKey.'.'.$childKey2.'.'.$childKey3.'.'.$childKey4.'.'.$childKey5,
-                                                                                'keyWithFileName' => $filename.".".$key.".".$childKey.".".$childKey2.".".$childKey3.".".$childKey4.".".$childKey5])
-                                                                            @endcomponent
-                                                                        @elseif(is_array($childItem5))
-                                                                            @foreach($childItem5 as $childKey6 => $childItem6)
-                                                                                @if(!is_array($childItem6))
-                                                                                    @component('layouts.components.lang_item',[
-                                                                                        'item' => $childItem6,
-                                                                                        'name' => $filename.'|'.$key.'|'.$childKey.'|'.$childKey2.'|'.$childKey3.'|'.$childKey4.'|'.$childKey5.'|'.$childKey6,
-                                                                                        'key' => $key.'.'.$childKey.'.'.$childKey2.'.'.$childKey3.'.'.$childKey4.'.'.$childKey5.'.'.$childKey6,
-                                                                                        'keyWithFileName' => $filename.".".$key.".".$childKey.".".$childKey2.".".$childKey3.".".$childKey4.".".$childKey5.".".$childKey6])
-                                                                                    @endcomponent
-                                                                                @endif
-                                                                            @endforeach
-                                                                        @endif
-                                                                    @endforeach
-                                                                @endif
-                                                            @endforeach
-                                                        @endif
-                                                    @endforeach
-                                                @endif
-                                            @endforeach
-                                        @endif
-                                    @endforeach
-                                @endif
-                            @endforeach
-                            <div class="form-group row new-trans">
-                                <div class="col-4">
-                                    {!! Form::text('new_key', null,  ['data-file'=>$filename,'class' => 'form-control form-control-sm new-key','placeholder'=> trans('lang.new_lang_key')]) !!}
-                                </div>
-                                <div class="input-group input-group-sm col-8">
-                                    {!! Form::text('new_value', null,  ['data-file'=>$filename, 'class' => 'form-control new-value','placeholder'=> trans('lang.new_lang_value')]) !!}
-                                    <div class="input-group-append">
-                                        <button class="btn btn-outline-success add-lang-item" type="button">{{__('lang.add')}}</button>
-                                    </div>
-                                </div>
-                                <div class="form-text offset-4 px-2 text-muted">
-                                    {{trans('lang.new_lang_value')}}
-                                </div>
-                            </div>
-                        </div>
-                    @endforeach
                 </div>
                 <!-- Submit Field -->
                 <div class="form-group mt-4 col-12 text-right">
