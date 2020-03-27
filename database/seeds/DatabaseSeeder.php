@@ -26,13 +26,12 @@ class DatabaseSeeder extends Seeder
         $this->call(GalleriesTableSeeder::class);
         $this->call(FoodReviewsTableSeeder::class);
         $this->call(RestaurantReviewsTableSeeder::class);
-        $this->call(PaymentsTableSeeder::class);
-        $this->call(DeliveryAddressesTableSeeder::class);
         $this->call(OrdersTableSeeder::class);
         $this->call(CartsTableSeeder::class);
         $this->call(NutritionTableSeeder::class);
         $this->call(ExtrasTableSeeder::class);
         $this->call(NotificationsTableSeeder::class);
+        $this->call(PaymentsTableSeeder::class);
         $this->call(FaqsTableSeeder::class);
         $this->call(FavoritesTableSeeder::class);
 
@@ -51,12 +50,14 @@ class DatabaseSeeder extends Seeder
 
         $this->call(MediaTableSeeder::class);
         $this->call(UploadsTableSeeder::class);
+        $this->call(DeliveryAddressesTableSeeder::class);
     }
 
     // For Update 1.6
 
 //    public function run()
 //    {
+//        $this->call(UsersTableSeeder::class);
 //        $this->call(DriverRestaurantsTableSeeder::class);
 //        $this->call(DemoPemissionsPermissionsTableSeeder::class);
 //        $this->call(RoleHasPermissionsTableSeeder::class);
